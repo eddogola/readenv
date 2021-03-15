@@ -2,6 +2,8 @@ package readenv
 
 import (
 	"io"
+	"io/ioutil"
+	"os"
 	"reflect"
 	"strings"
 	"testing"
@@ -20,7 +22,7 @@ func TestReadEnv(t *testing.T) {
 	}
 }
 
-func TestReadEnvGet(t *testing.T) {
+func TestEnvDataGet(t *testing.T) {
 	tests := []struct {
 		name        string
 		reader      io.Reader
@@ -60,6 +62,23 @@ func TestReadEnvGet(t *testing.T) {
 			}
 			checkErr(t, err)
 		})
+	}
+}
+
+func TestFile(t *testing.T) {
+	os.Mkdir("tmp", 0777)
+	tmpFile, err := ioutil.TempFile("tmp", "*.env")
+	checkErr(t, err)
+	tmpFile.WriteString("TEST_USER=johndoe")
+	defer os.Remove("tmp")
+	defer os.Remove(tmpFile.Name())
+
+	got, err := File(tmpFile.Name())
+	checkErr(t, err)
+	want := EnvData{"TEST_USER": "johndoe"}
+
+	if !reflect.DeepEqual(got, want) {
+		t.Errorf("got %v, wanted %v", got, want)
 	}
 }
 
