@@ -3,6 +3,7 @@ package readenv
 import (
 	"bufio"
 	"io"
+	"os"
 	"regexp"
 )
 
@@ -24,7 +25,7 @@ func (data EnvData) add(key, val string) {
 	data[key] = val
 }
 
-// ReadEnv parses env bytes data to EnvData
+// ReadEnv takes in an io.Reader, reads env vars from it andd returns an EnvData
 func ReadEnv(reader io.Reader) (EnvData, error) {
 	envData := make(EnvData)
 
@@ -38,6 +39,22 @@ func ReadEnv(reader io.Reader) (EnvData, error) {
 		envData.add(key, val)
 	}
 	if err := scanner.Err(); err != nil {
+		return nil, err
+	}
+
+	return envData, nil
+}
+
+// File takes in a filename, reads env vars from it andd returns an EnvData
+func File(filename string) (EnvData, error) {
+	file, err := os.OpenFile(filename, os.O_RDONLY, 0444) // open .env file
+	if err != nil {
+		return nil, err
+	}
+	defer file.Close()
+
+	envData, err := ReadEnv(file)
+	if err != nil {
 		return nil, err
 	}
 
