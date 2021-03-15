@@ -66,10 +66,12 @@ func TestEnvDataGet(t *testing.T) {
 }
 
 func TestFile(t *testing.T) {
-	os.Mkdir("tmp", 0777)
+	err := os.Mkdir("tmp", 0777)
+	checkErr(t, err)
 	tmpFile, err := ioutil.TempFile("tmp", "*.env")
 	checkErr(t, err)
-	tmpFile.WriteString("TEST_USER=johndoe")
+	_, err = tmpFile.WriteString("TEST_USER=johndoe")
+	checkErr(t, err)
 	defer os.Remove("tmp")
 	defer os.Remove(tmpFile.Name())
 
