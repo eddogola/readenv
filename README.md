@@ -1,5 +1,10 @@
 # readenv
 
+[![codecov](https://codecov.io/gh/eddogola/readenv/branch/main/graph/badge.svg?token=SLKBLF3ZDW)](https://codecov.io/gh/eddogola/readenv)
+[![Go Reference](https://pkg.go.dev/badge/github.com/eddogola/readenv.svg)](https://pkg.go.dev/github.com/eddogola/readenv)
+[![Build Status](https://travis-ci.com/eddogola/readenv.svg?branch=main)](https://travis-ci.com/eddogola/readenv)
+[![Go Report Card](https://goreportcard.com/badge/github.com/eddogola/readenv)](https://goreportcard.com/report/github.com/eddogola/readenv)
+
 A simple Go library to read environment variables files(.env files).
 
 ## Usage
