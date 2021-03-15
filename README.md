@@ -26,7 +26,7 @@ import (
 )
 
 func main() {
-    file, err := os.Open(".env", os.O_RDONLY, 0444) // open .env file
+    file, err := os.OpenFile(".env", os.O_RDONLY, 0444) // open .env file
     if err != nil {
         // handle error
     }
