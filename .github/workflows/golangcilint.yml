@@ -4,11 +4,8 @@ on: [push, pull_request, release]
 
 jobs:
   golangci:
-    strategy:
-      matrix:
-        os: [macos-latest, windows-latest]
     name: lint
-    runs-on: ${{ matrix.os }}
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
       - name: golangci-lint
