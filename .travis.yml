@@ -3,4 +3,10 @@ language: go
 go:
  - tip
 
-script: go test -v
+env:
+  - CODECOV_TOKEN='2cbc092f-7c59-4164-925f-2948141c2c61'
+
+script: go test -v -race -coverprofile=coverage.txt -covermode=atomic
+
+after_success:
+  - bash <(curl -s https://codecov.io/bash)
