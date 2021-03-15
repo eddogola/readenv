@@ -30,6 +30,7 @@ func main() {
     if err != nil {
         // handle error
     }
+    defer file.Close()
     
     envData, err := readenv.ReadEnv(file)
     if err != nil {
