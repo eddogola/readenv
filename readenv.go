@@ -31,7 +31,6 @@ func ReadEnv(reader io.Reader) (EnvData, error) {
 	scanner := bufio.NewScanner(reader)
 	for scanner.Scan() {
 		line := scanner.Text()
-		// fmt.Println(line, "done")
 		key, val, err := parse(line)
 		if err != nil {
 			return nil, err
