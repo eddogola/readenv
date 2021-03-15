@@ -7,6 +7,12 @@
 
 A simple Go library to read environment variables files(.env files).
 
+## Installing
+
+```bash
+go get -u github.com/eddogola/readenv
+```
+
 ## Usage
 
 The library basically parses the (file) byte data into a map, from which users can Get
