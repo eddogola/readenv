@@ -25,8 +25,8 @@ func (data EnvData) add(key, val string) {
 	data[key] = val
 }
 
-// ReadEnv takes in an io.Reader, reads env vars from it andd returns an EnvData
-func ReadEnv(reader io.Reader) (EnvData, error) {
+// Read takes in an io.Reader, reads env vars from it and returns an EnvData
+func Read(reader io.Reader) (EnvData, error) {
 	envData := make(EnvData)
 
 	scanner := bufio.NewScanner(reader)
@@ -45,7 +45,7 @@ func ReadEnv(reader io.Reader) (EnvData, error) {
 	return envData, nil
 }
 
-// File takes in a filename, reads env vars from it andd returns an EnvData
+// File takes in a filename, reads env vars from it and returns an EnvData
 func File(filename string) (EnvData, error) {
 	file, err := os.OpenFile(filename, os.O_RDONLY, 0444) // open .env file
 	if err != nil {
@@ -53,7 +53,7 @@ func File(filename string) (EnvData, error) {
 	}
 	defer file.Close()
 
-	envData, err := ReadEnv(file)
+	envData, err := Read(file)
 	if err != nil {
 		return nil, err
 	}

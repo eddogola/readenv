@@ -10,7 +10,7 @@ import (
 )
 
 func TestReadEnv(t *testing.T) {
-	got, err := ReadEnv(strings.NewReader("TEST_USER=JOHNDOE\nTEST_DB=postgres"))
+	got, err := Read(strings.NewReader("TEST_USER=JOHNDOE\nTEST_DB=postgres"))
 	checkErr(t, err)
 	want := EnvData(map[string]string{
 		"TEST_USER": "JOHNDOE",
@@ -51,7 +51,7 @@ func TestEnvDataGet(t *testing.T) {
 
 	for _, tc := range tests {
 		t.Run(tc.name, func(t *testing.T) {
-			got, err := ReadEnv(tc.reader)
+			got, err := Read(tc.reader)
 			if gotVal, _ := got.Get(tc.key); gotVal != tc.wantVal {
 				t.Errorf("wanted %v, got %v", tc.wantVal, gotVal)
 			}
