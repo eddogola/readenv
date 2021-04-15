@@ -35,7 +35,7 @@ func Read(reader io.Reader) (EnvData, error) {
 		line := scanner.Text()
 		key, val, err := parse(line)
 		if err != nil {
-			return nil, err
+			continue
 		}
 		envData.add(key, val)
 	}
