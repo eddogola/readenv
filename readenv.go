@@ -2,6 +2,7 @@ package readenv
 
 import (
 	"bufio"
+	"fmt"
 	"io"
 	"os"
 	"regexp"
@@ -68,6 +69,8 @@ func parse(line string) (string, string, error) {
 		return "", "", err
 	}
 	matches := re.FindStringSubmatch(line)
+	fmt.Println(matches)
+	fmt.Println(len(matches))
 	if len(matches) != 3 {
 		return "", "", errFindingTwoRegexSubmatches(line)
 	}
